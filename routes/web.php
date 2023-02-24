@@ -38,6 +38,8 @@ Route::get('register', [AuthController::class, 'register'])->name('auth.register
 
 Route::post('register', [AuthController::class, 'doRegister'])->name('auth.do-register');
 
+Route::get('logout', [AuthController::class, 'doLogout'])->name('auth.logout');
+
 Route::get('register-success', [AuthController::class, 'registrationSuccess'])->name('auth.register-success');
 
 Route::get('register-error', [AuthController::class, 'registrationError'])->name('auth.register-error');

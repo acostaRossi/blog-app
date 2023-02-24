@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -16,9 +17,28 @@ class AuthController extends Controller
         return view('auth.login', ['no_categories' => true]);
     }
 
-    public function doLogin(): View
+    public function doLogin(Request $request)
     {
-        // TODO
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $input = $request->only(['email', 'password']);
+
+        $user = User::where([
+            'email' => $input['email']
+        ])->first();
+
+        if(Hash::check($input['password'], $user->password))
+        {
+            $request->session()->put('logged', true);
+            $request->session()->put('user', $user);
+
+            return redirect()->route('news');
+        }
+
+        return back();
     }
 
     public function register(): View
@@ -39,7 +59,7 @@ class AuthController extends Controller
 
         $input['password'] = bcrypt($input['password']);
 
-        $user = User::where('email', $input['email'])->get();        
+        $user = User::where('email', $input['email'])->get();
 
         // if user already exists
         if(!$user->isEmpty())
@@ -90,5 +110,13 @@ class AuthController extends Controller
         }
 
         return redirect()->route('auth.login');
+    }
+
+    public function doLogout(Request $request)
+    {
+        $request->session()->forget('logged');
+        $request->session()->forget('user');
+
+        return redirect()->route('news');
     }
 }
