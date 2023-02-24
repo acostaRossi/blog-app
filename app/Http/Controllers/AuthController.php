@@ -74,6 +74,6 @@ class AuthController extends Controller
 
     private function sendEmail($user)
     {
-        return route('auth.register-confirm', $id, $user->remember_token);
+        return route('auth.register-confirm', $user->id, $user->remember_token);
     }
 }
