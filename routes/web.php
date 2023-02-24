@@ -42,4 +42,4 @@ Route::get('register-success', [AuthController::class, 'registrationSuccess'])->
 
 Route::get('register-error', [AuthController::class, 'registrationError'])->name('auth.register-error');
 
-Route::get('confirm-registration', [AuthController::class, 'registrationConfirm'])->name('auth.register-confirm');
+Route::get('confirm-registration/{id}/{token}', [AuthController::class, 'registrationConfirm'])->name('auth.register-confirm');

@@ -56,7 +56,9 @@ class AuthController extends Controller
             $msg = "Thank you for registering.</br>
                     We have sent you an email.";
 
-            $this->sendEmail($createdUser);
+            $emailLink = $this->sendEmail($createdUser);
+
+            $msg .= "</br> $emailLink";
 
             return view('auth.register-success')->with('msg', $msg);
         }
@@ -74,6 +76,19 @@ class AuthController extends Controller
 
     private function sendEmail($user)
     {
-        return route('auth.register-confirm', $user->id, $user->remember_token);
+        return route('auth.register-confirm', ['id' => $user->id, 'token' => $user->remember_token]);
+    }
+
+    public function registrationConfirm($id, $token)
+    {
+        $user = User::find($id);
+
+        if($user && $user->remember_token === $token)
+        {
+            $user->email_verified_at = now();
+            $user->save();
+        }
+
+        return redirect()->route('auth.login');
     }
 }
