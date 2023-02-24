@@ -9,6 +9,7 @@ use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -118,5 +119,10 @@ class AuthController extends Controller
         $request->session()->forget('user');
 
         return redirect()->route('news');
+    }
+
+    public function isLogged()
+    {
+        return Session::get('logged');
     }
 }

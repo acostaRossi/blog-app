@@ -20,11 +20,21 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+/******************************************************************************/
+/**************** NEWS ********************************************************/
+/******************************************************************************/
+
 Route::get('news', [NewsController::class, 'index'])->name('news');
 
-Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail');
+Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail')/*->middleware(['auth-blog'])*/;
 
 Route::get('news/category/{category}', [NewsController::class, 'getNewsByCategory'])->name('news-category');
+
+/******************************************************************************/
+/**************** COMMENTS ****************************************************/
+/******************************************************************************/
+
+Route::post('news/{id}/comment', [NewsController::class, 'doComment'])->name('auth.do-comment');
 
 /******************************************************************************/
 /**************** AUTH ********************************************************/
@@ -45,3 +55,4 @@ Route::get('register-success', [AuthController::class, 'registrationSuccess'])->
 Route::get('register-error', [AuthController::class, 'registrationError'])->name('auth.register-error');
 
 Route::get('confirm-registration/{id}/{token}', [AuthController::class, 'registrationConfirm'])->name('auth.register-confirm');
+

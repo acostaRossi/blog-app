@@ -21,7 +21,7 @@
           <div class="row">
             <p class="h3" style="text-align: center; margin-top:20px;">Comments</p>
             @foreach($news->comments as $comment)
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
                   <strong class="d-inline-block mb-2 text-primary">{{ $comment->user->name }}</strong>

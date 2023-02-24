@@ -45,4 +45,9 @@ class NewsController extends Controller
 
         return Category::all();
     }
+
+    public function doComment(Request $request)
+    {
+
+    }
 }
