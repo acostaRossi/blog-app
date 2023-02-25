@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Registration;
 
 class AuthController extends Controller
 {
@@ -81,6 +83,8 @@ class AuthController extends Controller
 
             $msg .= "</br> $emailLink";
 
+            
+
             return view('auth.register-success')->with('msg', $msg);
         }
     }
@@ -108,6 +112,8 @@ class AuthController extends Controller
         {
             $user->email_verified_at = now();
             $user->save();
+
+            Mail::to($user)->send(new Registration());
         }
 
         return redirect()->route('auth.login');
