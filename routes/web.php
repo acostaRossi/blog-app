@@ -30,11 +30,9 @@ Route::get('news/{id}', [NewsController::class, 'getNews'])->name('news-detail')
 
 Route::get('news/category/{category}', [NewsController::class, 'getNewsByCategory'])->name('news-category');
 
-/******************************************************************************/
-/**************** COMMENTS ****************************************************/
-/******************************************************************************/
+Route::post('news/{id}/comment', [NewsController::class, 'newComment'])->name('new-comment');
 
-Route::post('news/{id}/comment', [NewsController::class, 'doComment'])->name('auth.do-comment');
+Route::get('news/{id}/comments', [NewsController::class, 'getCommentsByNews'])->name('news-comments');
 
 /******************************************************************************/
 /**************** AUTH ********************************************************/

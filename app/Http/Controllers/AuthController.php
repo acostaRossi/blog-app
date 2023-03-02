@@ -33,7 +33,7 @@ class AuthController extends Controller
             'email' => $input['email']
         ])->first();
 
-        if(Hash::check($input['password'], $user->password))
+        if($user && Hash::check($input['password'], $user->password))
         {
             $request->session()->put('logged', true);
             $request->session()->put('user', $user);
@@ -113,7 +113,7 @@ class AuthController extends Controller
             $user->email_verified_at = now();
             $user->save();
 
-            Mail::to($user)->send(new Registration());
+            //Mail::to($user)->send(new Registration());
         }
 
         return redirect()->route('auth.login');
