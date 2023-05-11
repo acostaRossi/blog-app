@@ -10,4 +10,5 @@ A laravel based blog app for educational purpose
 ![enter image description here](https://raw.githubusercontent.com/acostaRossi/blog-app/main/screenshot-1.png)
 
 **News Detail Page**
+
 ![enter image description here](https://raw.githubusercontent.com/acostaRossi/blog-app/main/screenshot-2.png)
