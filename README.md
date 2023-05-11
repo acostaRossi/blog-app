@@ -20,3 +20,12 @@ A laravel based blog app for educational purpose
 
 ![enter image description here](https://raw.githubusercontent.com/acostaRossi/blog-app/main/screenshot-2.png)
 
+## Architecture
+
+![enter image description here](https://raw.githubusercontent.com/acostaRossi/blog-app/main/architecture.jpeg)
+
+## Technologies
+
+ - **Apache Web Server**
+ - **MariaDB**
+ - **JQuery**
